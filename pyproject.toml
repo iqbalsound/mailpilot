@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mailpilot"
+dynamic = ["version"]
+description = "A simple assignment email client with AI support"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Iqbal Uddin Khan", email = "iqbalsound@yahoo.com" }]
+dependencies = []
+
+[project.optional-dependencies]
+secure = ["keyring"]
+build = ["pyinstaller"]
+
+[project.urls]
+Homepage = "https://github.com/iqbalsound/mailpilot"
+
+[project.gui-scripts]
+mailpilot = "mailpilot.__main__:run"
+
+[tool.setuptools.dynamic]
+version = { attr = "mailpilot.meta.APP_VERSION" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mailpilot = ["data/*"]

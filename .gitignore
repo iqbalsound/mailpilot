@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+*.spec
+# Secrets and local files: never commit these
+.env
+.env.*
+*.key
+*.pem
+id_rsa*
+id_ed25519*
+accounts.json
+settings.json
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

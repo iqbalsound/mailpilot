@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Mailpilot
+GenericName=Email Client
+Comment=A simple assignment email client with AI support
+Exec=mailpilot
+Icon=mailpilot
+Terminal=false
+Categories=Network;Email;
+Keywords=email;mail;imap;pop3;smtp;
+StartupNotify=true

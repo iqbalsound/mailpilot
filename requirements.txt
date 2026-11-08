@@ -1,0 +1,4 @@
+# Runtime: only ONE optional package. Everything else is the Python standard library.
+# keyring stores passwords and API keys in your OS keyring (Windows Credential Manager,
+# macOS Keychain, GNOME/KDE secret service). Without it, secrets last for one session only.
+keyring
