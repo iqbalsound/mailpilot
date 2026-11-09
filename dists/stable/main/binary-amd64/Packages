@@ -1,0 +1,17 @@
+Package: mailpilot
+Version: 1.0.0
+Section: mail
+Priority: optional
+Architecture: amd64
+Maintainer: Iqbal Uddin Khan <iqbalsound@yahoo.com>
+Installed-Size: 33984
+Homepage: https://github.com/iqbalsound/mailpilot
+Description: A simple assignment email client with AI support
+ Mailpilot reads and sends mail over IMAP, POP3 and SMTP, has light and
+ dark themes, a rich-text editor with changeable text colour, and optional
+ AI draft replies that you review before sending.
+Filename: pool/main/m/mailpilot/mailpilot_1.0.0_amd64.deb
+Size: 34120246
+MD5sum: 78690aebce515338204398500ad8cb94
+SHA1: 38a760a38118001018220935d28b3cac85943e7c
+SHA256: e92cbcdc429f12d8dde89dd41e1c735da070fcd14aaf1b7963747e52a621c6d7

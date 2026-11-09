@@ -1,0 +1,17 @@
+Origin: Mailpilot
+Label: Mailpilot
+Suite: stable
+Codename: stable
+Date: Mon, 09 Nov 2026 01:55:36 GMT
+Architectures: amd64
+Components: main
+Description: Mailpilot APT repository
+MD5Sum:
+ dc6da6117af4c881f118a39f73259b42              704 main/binary-amd64/Packages
+ d5ac48a6167ce0dca0f072bc25301d27              496 main/binary-amd64/Packages.gz
+SHA1:
+ dd9d1b5fb196fa86ca302ade43836c46492f57f0              704 main/binary-amd64/Packages
+ adc4f1c79f0ca54e2c7c1390c9ba7d2fe57b1503              496 main/binary-amd64/Packages.gz
+SHA256:
+ 0627cd8c2e0b8d4803f0b065886599acbc86b56c9244ed698910277490cc26b9              704 main/binary-amd64/Packages
+ f6da1e67ee19d54ac9bfff2dc9c03c5035acd00f05a15357714d57695b8b884b              496 main/binary-amd64/Packages.gz

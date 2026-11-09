@@ -1,0 +1,36 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: Mailpilot
+Label: Mailpilot
+Suite: stable
+Codename: stable
+Date: Mon, 09 Nov 2026 01:55:36 GMT
+Architectures: amd64
+Components: main
+Description: Mailpilot APT repository
+MD5Sum:
+ dc6da6117af4c881f118a39f73259b42              704 main/binary-amd64/Packages
+ d5ac48a6167ce0dca0f072bc25301d27              496 main/binary-amd64/Packages.gz
+SHA1:
+ dd9d1b5fb196fa86ca302ade43836c46492f57f0              704 main/binary-amd64/Packages
+ adc4f1c79f0ca54e2c7c1390c9ba7d2fe57b1503              496 main/binary-amd64/Packages.gz
+SHA256:
+ 0627cd8c2e0b8d4803f0b065886599acbc86b56c9244ed698910277490cc26b9              704 main/binary-amd64/Packages
+ f6da1e67ee19d54ac9bfff2dc9c03c5035acd00f05a15357714d57695b8b884b              496 main/binary-amd64/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE+uT3DToYy2OOOXystR5+2kj1D5QFAmrxKBgACgkQtR5+2kj1
+D5TGOA//YsR5UadVnRvi/udyfBSNDT7OrBCGC/4pVjzRNSdn7gtZsuslYXoFLt6x
+G2r6D+3OAa5EnO07faSbTDhonNH8SoTHmIrtSYb21P6kaq13/oIhaYitfwOPuaSQ
+nhmESCr0uACuckEJKyxzKnvNJbgxMwCjf8b9C9E1VzEma0kwvllg4kb4wJHqi3po
+q/cV0/AIrQlN01UzDD7yp9PBYUGaAV2w/1eq4PLAdbMnIIItAhTgVkdZ1hu1HlQJ
+sBCNzOGthAu53sjidhosJ5QKlRUQfGxpno6omuBMCcAMWSrZh84wNYG93kGlmrw2
+Bobgv598ucSOp5N3rGghgrKK68ApR9ssE3Yjr0jwXkF7kxqPxY4TgVbxaqhsBOUH
+8LHhzJkwLZH2S38puZ0/wrUvUt0uBXpr7coKq2cGXJD6uBd+X6YVj6Baw67UlG3m
+/8WvgGQMAZhnLh+tC9cxFQCVvmyVAbPKF5p/a+Jhd/XhLIiWZS06OhoEJcNFnO6C
+QAp+pE1r8ag+J548AdXQb6pJpgVGU620xCxKU1T9ALfnJIDLhkZ0yPdfzcxAXhbz
+r87ZD2pFmJ+8KYQbqogYAEfebQA8eQpFx4bxzW+/D13q8A4P8VNowI1nwXlV/n4A
+WejzHScNAn04u6WegmKWbQ2SoAROzjL51mUacYv6C04P6VOqdfc=
+=G/Oo
+-----END PGP SIGNATURE-----
