@@ -1,7 +1,12 @@
-# Builds Linux (.deb + binary) and Windows (.exe) and attaches them to a GitHub Release.
-# Trigger: push a tag such as v1.0.0  (git tag -a v1.0.0 -m "Mailpilot 1.0.0" && git push origin v1.0.0)
-# Also runnable by hand from the Actions tab (builds and uploads artifacts, no release).
-# Check the action versions below before relying on this file.
+# Mailpilot release pipeline
+#
+#   git tag -a v1.0.0 -m "Mailpilot 1.0.0" && git push origin v1.0.0
+#
+# builds   : Linux binary + .deb, Windows .exe
+# publishes: a GitHub Release with those files + SHA256SUMS.txt
+#            and (if the signing secret exists) the signed APT repository on the gh-pages branch
+# Manual run (Actions tab > release > Run workflow) builds and keeps the files as artifacts only.
+# Check the action versions below against their current releases before relying on this file.
 name: release
 on:
   push:
@@ -31,6 +36,8 @@ jobs:
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m unittest -v
       - run: python scripts/build.py
+      - name: Self-test the built binary
+        run: ./dist/mailpilot --selftest
       - run: bash packaging/build_deb.sh
       - uses: actions/upload-artifact@v4
         with: { name: linux, path: "dist/release/*" }
@@ -44,6 +51,11 @@ jobs:
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m unittest -v
       - run: python scripts/build.py
+      - name: Self-test the built exe
+        shell: pwsh
+        run: |
+          $p = Start-Process -FilePath "dist\mailpilot.exe" -ArgumentList "--selftest" -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "mailpilot.exe self-test failed (exit code $($p.ExitCode))" }
       - uses: actions/upload-artifact@v4
         with: { name: windows, path: "dist/release/*" }
 
@@ -60,3 +72,46 @@ jobs:
         with:
           files: release/*
           generate_release_notes: true
+          body: |
+            ## Install
+            * **Windows:** download `mailpilot-*-windows-x86_64.exe` and run it (unsigned: SmartScreen may warn).
+            * **Debian / Ubuntu (APT, updates automatically):** see https://iqbalsound.github.io/mailpilot/
+            * **Debian / Ubuntu (single file):** `sudo apt install ./mailpilot_*_amd64.deb`
+            * **Other Linux:** download `mailpilot-*-linux-x86_64`, then `chmod +x` it and run it.
+            * Verify downloads with `sha256sum -c SHA256SUMS.txt`.
+
+  apt:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [linux]
+    runs-on: ubuntu-latest
+    env:
+      APT_GPG_PRIVATE_KEY: ${{ secrets.APT_GPG_PRIVATE_KEY }}
+      GPG_PASSPHRASE: ${{ secrets.APT_GPG_PASSPHRASE }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Is APT signing configured?
+        id: chk
+        run: |
+          if [ -n "$APT_GPG_PRIVATE_KEY" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Secret APT_GPG_PRIVATE_KEY is not set: skipping the APT repository (the Release is unaffected)."
+          fi
+      - if: steps.chk.outputs.ok == 'true'
+        uses: actions/download-artifact@v4
+        with: { name: linux, path: release }
+      - if: steps.chk.outputs.ok == 'true'
+        name: Import the signing key
+        run: |
+          printf '%s\n' "$APT_GPG_PRIVATE_KEY" | gpg --batch --import
+          FPR=$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr/{print $10; exit}')
+          test -n "$FPR" || { echo "No secret key was imported"; exit 1; }
+          echo "APT_KEY=$FPR" >> "$GITHUB_ENV"
+      - if: steps.chk.outputs.ok == 'true'
+        name: Publish to the gh-pages branch
+        env:
+          REMOTE: https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        run: |
+          git config --global user.name  "github-actions"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          bash scripts/apt_publish.sh release/*.deb

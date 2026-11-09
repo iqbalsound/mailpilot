@@ -22,7 +22,7 @@ fi
 git add -A
 
 # --- safety checks before anything is committed ---
-bad="$(git diff --cached --name-only | grep -E '(^|/)(\.venv|dist|build|__pycache__)/|(^|/)\.env|\.pem$|\.key$|id_(rsa|ed25519)|(^|/)(accounts|settings)\.json$' || true)"
+bad="$(git diff --cached --name-only | grep -E '(^|/)(\.venv|dist|build|__pycache__)/|(^|/)\.env|\.pem$|\.key$|\.gpg$|\.asc$|private|id_(rsa|ed25519)|(^|/)(accounts|settings)\.json$' || true)"
 if [ -n "$bad" ]; then
   echo "Refusing to commit these files:"; echo "$bad"; exit 1
 fi

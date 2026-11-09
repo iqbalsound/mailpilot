@@ -12,6 +12,9 @@ dist/
 .env.*
 *.key
 *.pem
+*.gpg
+*.asc
+*private*
 id_rsa*
 id_ed25519*
 accounts.json
